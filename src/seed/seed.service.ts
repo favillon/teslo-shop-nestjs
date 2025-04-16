@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ProductsService } from 'src/products/products.service';
 import { initialData } from './data/seed-data';
 
@@ -10,6 +10,10 @@ export class SeedService {
   ) {}
 
   async runSeed() {
+    // validate if enviroment is development
+    if (process.env.NODE_ENV !== 'development') {
+      throw new NotFoundException('URL not found in production');
+    }
     this.insertNewProducts();
     return 'Run Seed';
   }
