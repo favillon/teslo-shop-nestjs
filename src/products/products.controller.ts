@@ -20,8 +20,8 @@ export class ProductsController {
   }
 
   @Get(':term')
-  async findOne(@Param('term') term: string) {    
-    return this.productsService.findOne(term);
+  async findOne(@Param('term') term: string) {
+    return this.productsService.findOnePlain(term);
   }
 
   @Patch(':id')

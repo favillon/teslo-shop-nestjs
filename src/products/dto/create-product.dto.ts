@@ -5,7 +5,7 @@ export class CreateProductDto {
     @IsString()
     @MinLength(1)
     title: string;
-    
+
     @IsNumber()
     @IsPositive()
     @IsOptional()
@@ -37,5 +37,10 @@ export class CreateProductDto {
     @IsArray()
     @IsOptional()
     tags: string[];
+
+    @IsString({ each: true })
+    @IsArray()
+    @IsOptional()
+    images?: string[];
 
 }

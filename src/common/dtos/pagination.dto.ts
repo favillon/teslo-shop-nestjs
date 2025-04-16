@@ -2,7 +2,7 @@ import { Type } from "class-transformer";
 import { IsNumber, IsOptional, IsPositive } from "class-validator";
 
 export class PaginationDto {
-  
+
   @IsNumber()
   @IsOptional()
   @IsPositive()
@@ -14,4 +14,4 @@ export class PaginationDto {
   @IsPositive()
   @Type(() => Number)
   offset?: number;
-}   
+}
