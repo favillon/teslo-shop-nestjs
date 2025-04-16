@@ -14,10 +14,15 @@ yarn install
 
 4. Levantar DB
 ```sh
-docker-compose up -d 
+docker-compose up -d
 ```
 
-5. Ejecutar aplicacion 
+5. Ejecutar aplicacion
 ```sh
 yarn start:dev
+```
+
+6. Ejecucion seeds
+```sh
+curl --location --request POST 'localhost:3000/api/v1/seed'
 ```
