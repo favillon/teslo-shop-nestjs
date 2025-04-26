@@ -1,12 +1,13 @@
 
-import { Response } from 'express';
 import { BadRequestException,  Controller, Get, Param, Res, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
-import { diskStorage } from 'multer';
-
-import { FileService } from './file.service';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { fileFilter, fileNamer } from 'src/helpers/';
 import { ConfigService } from '@nestjs/config';
+import { diskStorage } from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Response } from 'express';
+
+import { Auth } from '../auth/decorators/auth.decorator';
+import { fileFilter, fileNamer } from 'src/helpers/';
+import { FileService } from './file.service';
 
 
 @Controller('file')
@@ -26,6 +27,7 @@ export class FileController {
   }
 
   @Post('product')
+  @Auth()
   @UseInterceptors(FileInterceptor('file', {
     fileFilter: fileFilter,
     limits: { fileSize: 1024 * 1024 * 5 }, // 5MB
