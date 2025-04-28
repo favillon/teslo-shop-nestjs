@@ -34,3 +34,10 @@ Documentacion generada con POSTMAN para el manejo de las colecciones
 URL `https://documenter.getpostman.com/view/11149441/2sB2j1isnH#75de8a23-70a7-4c70-b9d6-96a0d1c9a737`
 
 ![DOC POSTMAN](./img/POSTMAN.png)
+
+
+## Documentacion con Swagger
+
+Para acceder a la documentacion con Swagger,  debe visitar la siguiente URL: `http://localhost:3000/api/`
+
+![DOC POSTMAN](./img/Swagger.png)
