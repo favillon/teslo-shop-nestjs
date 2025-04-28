@@ -26,3 +26,11 @@ yarn start:dev
 ```sh
 curl --location --request POST 'localhost:3000/api/v1/seed'
 ```
+
+## Coleccion POSTMAN
+
+Documentacion generada con POSTMAN para el manejo de las colecciones
+
+URL `https://documenter.getpostman.com/view/11149441/2sB2j1isnH#75de8a23-70a7-4c70-b9d6-96a0d1c9a737`
+
+![DOC POSTMAN](./img/POSTMAN.png)
