@@ -1,13 +1,14 @@
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { validate as isUUID } from 'uuid';
 
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { Product } from './entities/product.entity';
 import { ProductImage } from './entities/product-image.entity';
-import { PaginationDto } from 'src/common/dtos/pagination.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { User } from '../auth/entities/users.entity';
 
 @Injectable()
 export class ProductsService {
@@ -24,7 +25,7 @@ export class ProductsService {
     private readonly dataSource: DataSource,
   ){}
 
-  async create(createProductDto: CreateProductDto) {
+  async create(createProductDto: CreateProductDto, user: User) {
     //  Patron repository
     try {
       // Registro en Memoria
@@ -32,6 +33,7 @@ export class ProductsService {
       const product =  this.productRepository.create({
         ...productDetails,
         images: images!.map(image => this.productImageRepository.create({url: image}) ),
+        user
       });
       await this.productRepository.save(product);
       return {...product, images};
@@ -88,7 +90,7 @@ export class ProductsService {
     };
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto, user:User) {
     const { images, ...toUpdate } = updateProductDto;
     const product = await this.productRepository.preload({ id, ...toUpdate});
 
@@ -105,6 +107,7 @@ export class ProductsService {
         await queryRunner.manager.delete(ProductImage, { product: { id } });
         product.images = images.map(image => this.productImageRepository.create({ url: image }));
       }
+      product.user
       await queryRunner.manager.save(product);
 
       //await this.productRepository.save(product);
