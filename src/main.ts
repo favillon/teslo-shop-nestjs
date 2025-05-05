@@ -15,6 +15,9 @@ async function bootstrap() {
     })
   );
 
+  // Habilitar CORS
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('Teslo Shop API')
     .setDescription('The Teslo shop API description')
